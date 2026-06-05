@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="Quote">
+  <rect width="320" height="180" fill="#f6f8fb"/>
+  <text x="40" y="80" font-family="Georgia, serif" font-size="64" fill="#2276fc">&#8220;</text>
+  <rect x="70" y="62" width="180" height="12" rx="6" fill="#18181b"/>
+  <rect x="90" y="84" width="140" height="12" rx="6" fill="#18181b"/>
+  <rect x="120" y="120" width="80" height="9" rx="4" fill="#9aa3af"/>
+  <text x="296" y="170" text-anchor="end" font-family="sans-serif" font-size="11" fill="#9aa3af">Quote</text>
+</svg>

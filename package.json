@@ -1,0 +1,73 @@
+{
+  "name": "page-builder-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example: building a Sanity page builder with sanity-plugin-section-builder (Studio) + sanity-page-builder-core (Next.js frontend).",
+  "license": "MIT",
+  "author": "Maciej Trzciński",
+  "keywords": [
+    "sanity",
+    "sanity-plugin",
+    "page-builder",
+    "nextjs",
+    "cms",
+    "tailwindcss",
+    "example"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/page-builder-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OWNER/page-builder-example/issues"
+  },
+  "homepage": "https://github.com/OWNER/page-builder-example#readme",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@10.4.1",
+  "scripts": {
+    "predev": "pnpm typegen",
+    "dev": "next dev",
+    "prebuild": "pnpm typegen",
+    "build": "next build",
+    "start": "next start",
+    "pretype-check": "pnpm typegen",
+    "type-check": "tsc --noEmit",
+    "extract-schema": "sanity schema extract --path schema.json",
+    "typegen": "sanity schema extract --path schema.json && sanity typegen generate",
+    "seed": "node scripts/seed.mjs",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "knip": "knip"
+  },
+  "dependencies": {
+    "@maciejtrzcinski/sanity-page-builder-core": "^1.0.0",
+    "@maciejtrzcinski/sanity-plugin-section-builder": "^1.0.0",
+    "@portabletext/react": "^6.2.0",
+    "@sanity/client": "^7.22.1",
+    "@sanity/image-url": "^2.1.1",
+    "next": "^16.2.6",
+    "next-sanity": "^13.0.8",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "sanity": "^5.28.0",
+    "server-only": "^0.0.1",
+    "styled-components": "^6.4.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.6",
+    "eslint-config-prettier": "^10.1.8",
+    "knip": "^6.15.0",
+    "postcss": "^8.5.15",
+    "prettier": "^3.8.3",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
+  }
+}

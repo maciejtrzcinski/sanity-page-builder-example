@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# NOTE: this app consumes the two sibling packages via `link:` (see
+# package.json). For CI to install/build standalone, those packages must be
+# reachable — either published to npm (and the `link:` specifiers swapped for
+# versions), or checked out alongside this repo in a monorepo. Until then, the
+# install/type-check/knip/build steps require that adjacent checkout.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # type-check runs `pretype-check` → `pnpm typegen`, which loads the Studio
+      # schema (sanity.config.ts → sanity/env). Provide the same dummy Sanity env
+      # as the build step so the env assertions pass. This also generates the
+      # gitignored sanity.types.ts that the later knip/build steps rely on.
+      - name: Type-check
+        run: pnpm type-check
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: your-project-id
+          NEXT_PUBLIC_SANITY_DATASET: production
+          NEXT_PUBLIC_SANITY_API_VERSION: '2024-10-01'
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Knip
+        run: pnpm knip
+
+      - name: Build
+        run: pnpm build
+        env:
+          # Dummy values so env assertions pass; data fetches degrade gracefully.
+          NEXT_PUBLIC_SANITY_PROJECT_ID: your-project-id
+          NEXT_PUBLIC_SANITY_DATASET: production
+          NEXT_PUBLIC_SANITY_API_VERSION: '2024-10-01'

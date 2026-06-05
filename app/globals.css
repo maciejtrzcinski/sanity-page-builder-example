@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+/* Tailwind v4 theme tokens — exposes `bg-accent`, `text-accent`, etc. */
+@theme {
+  --color-accent: #2276fc;
+  --color-accent-fg: #ffffff;
+}
+
+/* Anchored sections (the page builder adds id="..." to wrapped sections). */
+section[id] {
+  scroll-margin-top: 5rem;
+}

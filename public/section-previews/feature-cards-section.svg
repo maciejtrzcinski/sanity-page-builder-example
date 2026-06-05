@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="Feature Cards">
+  <rect width="320" height="180" fill="#f6f8fb"/>
+  <rect x="24" y="22" width="140" height="14" rx="6" fill="#18181b"/>
+  <g fill="#fff" stroke="#e5e7eb">
+    <rect x="24" y="56" width="84" height="96" rx="10"/>
+    <rect x="118" y="56" width="84" height="96" rx="10"/>
+    <rect x="212" y="56" width="84" height="96" rx="10"/>
+  </g>
+  <g fill="#2276fc">
+    <rect x="36" y="70" width="20" height="20" rx="6"/>
+    <rect x="130" y="70" width="20" height="20" rx="6"/>
+    <rect x="224" y="70" width="20" height="20" rx="6"/>
+  </g>
+  <text x="296" y="170" text-anchor="end" font-family="sans-serif" font-size="11" fill="#9aa3af">Feature Cards</text>
+</svg>

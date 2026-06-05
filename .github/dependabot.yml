@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      # Batch routine dev-tooling bumps into a single PR.
+      dev-dependencies:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Held back deliberately: eslint-config-next's bundled plugins don't
+      # support ESLint 10 yet (see the devDependencies note).
+      - dependency-name: eslint
+        update-types:
+          - version-update:semver-major
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
