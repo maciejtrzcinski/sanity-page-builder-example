@@ -57,17 +57,17 @@
     "styled-components": "^6.4.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^25.9.1",
     "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.7",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.11",
     "eslint-config-prettier": "^10.1.8",
-    "knip": "^6.15.0",
-    "postcss": "^8.5.15",
-    "prettier": "^3.8.3",
-    "tailwindcss": "^4.3.0",
+    "knip": "^6.29.0",
+    "postcss": "^8.5.22",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   }
 }
