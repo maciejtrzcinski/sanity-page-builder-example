@@ -10,6 +10,7 @@ import {CtaBanner} from '../sections/CtaBanner'
 import {Faq} from '../sections/Faq'
 import {FeatureCards} from '../sections/FeatureCards'
 import {Hero} from '../sections/Hero'
+import {ImageText} from '../sections/ImageText'
 import {Quote} from '../sections/Quote'
 import type {RenderContext} from './context'
 import type {PageBuilderBlock} from './types'
@@ -34,6 +35,11 @@ const sections = [
     type: 'quoteSection',
     query: `quote, author, role, sectionId`,
     render: (block) => <Quote block={block} />,
+  }),
+  defineSection({
+    type: 'imageTextSection',
+    query: `image{ asset, alt }, heading, body, imagePosition, sectionId`,
+    render: (block) => <ImageText block={block} />,
   }),
   defineSection({
     type: 'faqSection',

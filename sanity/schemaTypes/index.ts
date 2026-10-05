@@ -19,6 +19,7 @@ import {ctaBannerSection} from './sections/ctaBannerSection'
 import {faqSection} from './sections/faqSection'
 import {featureCardsSection} from './sections/featureCardsSection'
 import {heroSection} from './sections/heroSection'
+import {imageTextSection} from './sections/imageTextSection'
 import {quoteSection} from './sections/quoteSection'
 import {settings} from './settings'
 
@@ -39,6 +40,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   heroSection,
   featureCardsSection,
   quoteSection,
+  imageTextSection,
   faqSection,
   ctaBannerSection,
   blogPostsSection,

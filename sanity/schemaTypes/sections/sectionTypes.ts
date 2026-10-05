@@ -5,6 +5,7 @@ export const SECTION_TYPES = [
   'heroSection',
   'featureCardsSection',
   'quoteSection',
+  'imageTextSection',
   'faqSection',
   'ctaBannerSection',
   'blogPostsSection',

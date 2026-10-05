@@ -31,6 +31,16 @@ export type QuoteBlock = {
   sectionId?: string | null
 }
 
+export type ImageTextBlock = {
+  _type: 'imageTextSection'
+  _key: string
+  image: {asset?: {_ref?: string | null} | null; alt?: string | null} | null
+  heading?: string | null
+  body?: string | null
+  imagePosition?: 'left' | 'right' | null
+  sectionId?: string | null
+}
+
 export type FaqBlock = {
   _type: 'faqSection'
   _key: string
@@ -80,7 +90,13 @@ export type PageQueryResult = {
   navigationOverride?: import('../chrome/types').NavBlock | null
   footerOverride?: import('../chrome/types').FooterBlock | null
   pageBuilder: Array<
-    HeroBlock | FeatureCardsBlock | QuoteBlock | FaqBlock | CtaBannerBlock | BlogPostsBlock
+    | HeroBlock
+    | FeatureCardsBlock
+    | QuoteBlock
+    | ImageTextBlock
+    | FaqBlock
+    | CtaBannerBlock
+    | BlogPostsBlock
   > | null
 } | null
 
