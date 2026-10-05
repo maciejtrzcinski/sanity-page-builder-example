@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@maciejtrzcinski/sanity-page-builder-core": "^1.0.2",
-    "@maciejtrzcinski/sanity-plugin-section-builder": "^1.0.0",
+    "@maciejtrzcinski/sanity-plugin-section-builder": "^1.0.1",
     "@portabletext/react": "^8.0.1",
     "@sanity/client": "^8.2.0",
     "@sanity/image-url": "^2.1.1",
