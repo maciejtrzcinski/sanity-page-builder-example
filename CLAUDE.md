@@ -48,8 +48,8 @@ C4 diagrams (Context / Container / Component) live in
   `metadata.ts` (SEO), `imageLoader.ts` (next/image → Sanity CDN loader, wired
   via `next.config.ts` `images.loaderFile`).
 - **Schema** (`sanity/schemaTypes/`): `page`, `settings`, blog types, `person`,
-  and `sections/*` + `chrome/*` object types. `sectionBuilderConfig.ts` lists
-  the `SECTIONS` registered in the Studio.
+  and `sections/*` + `chrome/*` object types. `sanity/sectionBuilderConfig.ts`
+  builds the `SECTIONS` config (from `sections/sectionTypes.ts`) used by the Studio.
 
 ## Adding a section
 
@@ -58,6 +58,45 @@ Schema (`sanity/schemaTypes/sections/<name>Section.ts` + register in
 `public/section-previews/<kebab-name>.svg` → component in
 `components/sections/` → block variant in `components/pageBuilder/types.ts` →
 `defineSection` entry in `registry.tsx`. (README has the detailed version.)
+
+- Copy the closest existing section as the starting point for each file (e.g.
+  `quoteSection.ts` / `Quote.tsx` / its `.svg`) so naming, preview config and
+  styling stay consistent.
+- Every section schema includes the optional `sectionId` field and every
+  `query` projects it — `PageBuilder.tsx` uses it for `<section id>` anchors.
+- Components are server components taking a single `{block}` prop typed from
+  `types.ts`; the `query` must project exactly the fields the component reads.
+- Order in `SECTION_TYPES` = order in the Studio insert menu.
+- Nav/footer variants follow the same recipe with `sanity/schemaTypes/chrome/*`,
+  `chromeTypes.ts`, and `components/chrome/` (types + `{nav,footer}Registry.tsx`).
+
+## Creating pages (content)
+
+Pages are content in the dataset, not code. Create or edit them through the
+**Sanity MCP server** when it's connected (`create_documents`, `patch_documents`).
+
+- **Leave changes as drafts.** Don't publish unless the user asks — they review
+  in the Studio first.
+- **The local schema is the source of truth** (`sanity/schemaTypes/`, or the
+  generated `schema.json`). The deployed schema may be missing or stale, so read
+  the local files for field names.
+- **Shape** — every array item (sections, cards, FAQ items, links) needs a
+  unique `_key`:
+  ```js
+  {_type: 'page', title, slug: {_type: 'slug', current: 'docs/intro'},
+   pageBuilder: [{_type: 'heroSection', _key: 'hero', heading: '…'}]}
+  ```
+- **Slugs** are the full path with no leading/trailing slash; `blog` and
+  `blog/*` are reserved for the blog routes and rejected by validation.
+- **Home page** is the `homePage` reference on the `settings` singleton
+  (`_id: 'settings'`). Per-page nav/footer: `navigationOverride` /
+  `footerOverride` references to `navigation` / `footer` documents.
+- **Images** need an uploaded asset (MCP asset upload tools), then
+  `{_type: 'image', asset: {_type: 'reference', _ref: '<asset id>'}, alt}`.
+- **Sample content that ships with the repo** lives in `sanity/seed.ndjson`
+  (one document per line; images as `"seedImage:<key>"` tokens resolved via
+  `sanity/seed_images/manifest.ndjson`). When adding a section, consider adding
+  an example of it there; `pnpm seed` re-imports.
 
 ## Types (TypeGen) — important
 

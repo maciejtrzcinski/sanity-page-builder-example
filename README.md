@@ -14,6 +14,10 @@ There are seven sections (Hero, Feature Cards, Quote, Image + Text, FAQ, CTA
 Banner, Blog Posts), a small blog, swappable nav and footer, SEO metadata, and
 live preview in the Studio's Presentation tool.
 
+The repo is also set up for working alongside an AI coding agent. You can ask it
+to build new sections and components, or to create pages straight in your
+dataset. See [Working with AI](#working-with-ai).
+
 ## Getting started
 
 You need Node 22.12+, pnpm, and a Sanity project. If you don't have one, run
@@ -84,8 +88,42 @@ For diagrams and a component-by-component tour, see
 4. Add the block type to `components/pageBuilder/types.ts`.
 5. Add a `defineSection` entry to `components/pageBuilder/registry.tsx`.
 
-New nav and footer styles go through the same steps, using the files in
-`components/chrome/`.
+New nav and footer styles follow the same steps without the thumbnail. Their
+files are in `sanity/schemaTypes/chrome/` and `components/chrome/`.
+
+## Working with AI
+
+Every section is built the same way, and nothing is wired up by hand. That makes
+this repo easy for an AI agent like Claude Code or Cursor to work in.
+
+[`CLAUDE.md`](CLAUDE.md) gives the agent everything it needs: where things
+live, the steps for adding a section, the rules for types, and how to create
+pages. It also tells the agent to run `pnpm type-check`, `pnpm lint` and
+`pnpm knip` before calling a task done. Those three checks catch the usual
+mistakes, like a section missing from the registry, a block type that doesn't
+match its query, or a leftover export. Claude Code reads `CLAUDE.md`
+automatically. With other agents, point them at the file.
+
+**Sections and components.** Describe what you want and the agent works through
+the five steps above. That covers the schema, preview SVG, component, block type
+and registry entry. Nav and footer variants work the same way.
+
+**Pages.** Connect the [Sanity MCP server](https://www.sanity.io/docs/ai/mcp-server)
+and the agent can read your content and create pages in your dataset. It
+creates them as drafts, so you can review them in the Studio before you publish.
+
+```sh
+pnpm dlx sanity@latest mcp configure   # detects Claude Code, Cursor and VS Code
+# or, for Claude Code only:
+claude mcp add Sanity -t http https://mcp.sanity.io --scope user
+```
+
+Some prompts to try:
+
+- "Add a Testimonials section with a quote, a name, a role and an optional photo."
+- "Make a Logo Cloud section and use it on the home page."
+- "Create a draft Pricing page with a hero, three feature cards, an FAQ and a CTA banner."
+- "Add a footer variant with a newsletter signup line."
 
 ## Types
 

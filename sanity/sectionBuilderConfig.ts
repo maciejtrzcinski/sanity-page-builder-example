@@ -11,8 +11,8 @@ import {SECTION_TYPES} from './schemaTypes/sections/sectionTypes'
  * `${kebab(type)}.svg` under /public/section-previews/ (see public/section-previews).
  *
  * This example lists sections explicitly (cycle-safe to import from a schema
- * module). For larger studios you can instead auto-detect them — see the README's
- * "Auto-detect" note — using `detect: {types: schemaTypes}`.
+ * module). For larger studios you can instead auto-detect them with
+ * `detect: {types: schemaTypes}` — see the section-builder plugin's README.
  */
 export const SECTIONS: SectionBuilderConfig = {
   previewBaseUrl: '/section-previews',

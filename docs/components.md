@@ -15,13 +15,13 @@ CMS. This is the component-level companion to the architecture diagrams in
 ```
 components/
   pageBuilder/        the page-builder engine (registry + render loop + types)
-    registry.tsx        defineSection ×6  → renderBlock + pageBuilderProjection
+    registry.tsx        defineSection ×7  → renderBlock + pageBuilderProjection
     PageBuilder.tsx     the render loop; wraps anchored sections in <section id>
     types.ts            the block union (PageBuilderBlock) + PageQueryResult
     context.ts          RenderContext passed to every section renderer
-  sections/           one component per page-builder section (the 6 below)
-    Hero.tsx  FeatureCards.tsx  Quote.tsx  Faq.tsx  CtaBanner.tsx
-    BlogPostsSection.tsx
+  sections/           one component per page-builder section (the 7 below)
+    Hero.tsx  FeatureCards.tsx  Quote.tsx  ImageText.tsx  Faq.tsx
+    CtaBanner.tsx  BlogPostsSection.tsx
   chrome/             site chrome — same pattern, for nav + footer
     navRegistry.tsx  footerRegistry.tsx   variant → component + projection
     MinimalNav.tsx  CtaNav.tsx  SimpleFooter.tsx  ColumnsFooter.tsx
@@ -45,7 +45,7 @@ wiring. The page builder and the chrome registries use the **same** three:
 - **`createPageBuilderFromSections(sections)`** combines those entries into a
   single `renderBlock` (dispatch a block to its component) and a single `query`
   (every section's projection, concatenated) — see
-  `components/pageBuilder/registry.tsx:64`.
+  `components/pageBuilder/registry.tsx:70`.
 - **`renderPageBuilderBlocks(blocks, ctx, {renderBlock, wrap})`** is the render
   loop; `wrap` turns each rendered block into an element (and applies the
   section-anchor convention) — see `components/pageBuilder/PageBuilder.tsx:25`.
@@ -60,7 +60,7 @@ fetches **exactly** what it renders — nothing more.
 
 ## Section components
 
-The six page-builder sections. Each is a plain server component taking a single
+The seven page-builder sections. Each is a plain server component taking a single
 typed `block` prop (its block type from `components/pageBuilder/types.ts`); the
 fields it reads come from that section's `query` in `registry.tsx`.
 
@@ -69,6 +69,7 @@ fields it reads come from that section's `query` in `registry.tsx`.
 | `Hero`             | `heroSection`         | Eyebrow, heading, subheading, optional CTA link |
 | `FeatureCards`     | `featureCardsSection` | Heading + a grid of `{title, body}` cards       |
 | `Quote`            | `quoteSection`        | Pull-quote with author + role                   |
+| `ImageText`        | `imageTextSection`    | Image beside heading + body, image left/right   |
 | `Faq`              | `faqSection`          | Heading + a list of `{question, answer}` items  |
 | `CtaBanner`        | `ctaBannerSection`    | Heading, body, and a call-to-action button      |
 | `BlogPostsSection` | `blogPostsSection`    | Latest posts (optional category filter, `max`)  |
@@ -76,7 +77,7 @@ fields it reads come from that section's `query` in `registry.tsx`.
 `BlogPostsSection` is the one section that fetches **related** documents: its
 projection runs a GROQ sub-query (`^.category` filter, newest first) so the
 section pulls in posts, and the component slices to `block.max ?? 6` — see
-`components/pageBuilder/registry.tsx:48`.
+`components/pageBuilder/registry.tsx:54`.
 
 ### Anatomy of one section
 
@@ -182,7 +183,7 @@ its own `ChromeContext` for the same purpose.
 
 ## Adding a component
 
-A new section or chrome variant is the same five-step recipe (schema → preview
-SVG → component → block type → registry entry). The full walk-through lives in
-the **Adding a new section** and **Navigation & footer** sections of
-[`README.md`](../README.md).
+A new section is a five-step recipe (schema → preview SVG → component → block
+type → registry entry); a chrome variant is the same minus the preview SVG. The
+steps live in the **Adding a new section** part of [`README.md`](../README.md),
+and [`CLAUDE.md`](../CLAUDE.md) has the conventions an AI agent should follow.
