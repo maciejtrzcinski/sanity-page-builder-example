@@ -5,7 +5,24 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
+    # A dependency joins the first group it matches, so the coupled groups
+    # come before the catch-all dev-dependencies group.
     groups:
+      # Released in lockstep; eslint-config-next should track next's version.
+      next-react:
+        patterns:
+          - next
+          - eslint-config-next
+          - react
+          - react-dom
+          - '@types/react'
+          - '@types/react-dom'
+      # next-sanity's peer ranges pin which sanity / @sanity/client it accepts.
+      sanity:
+        patterns:
+          - sanity
+          - '@sanity/*'
+          - next-sanity
       # Batch routine dev-tooling bumps into a single PR.
       dev-dependencies:
         dependency-type: development
@@ -13,9 +30,14 @@ updates:
           - minor
           - patch
     ignore:
-      # Held back deliberately: eslint-config-next's bundled plugins don't
-      # support ESLint 10 yet (see the devDependencies note).
+      # Held back deliberately: eslint-config-next's bundled plugins
+      # (eslint-plugin-react, -import, -jsx-a11y) don't support ESLint 10 yet.
       - dependency-name: eslint
+        update-types:
+          - version-update:semver-major
+      # Held back deliberately: typescript-eslint (via eslint-config-next)
+      # only supports typescript <6.1.0, so TypeScript 7 breaks linting.
+      - dependency-name: typescript
         update-types:
           - version-update:semver-major
 

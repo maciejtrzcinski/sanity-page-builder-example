@@ -4,7 +4,9 @@ import prettier from 'eslint-config-prettier'
 
 const eslintConfig = [
   {
-    ignores: ['.next/**', 'node_modules/**', 'next-env.d.ts'],
+    // sanity.types.ts is TypeGen output (gitignored); its emitted shapes
+    // aren't ours to lint.
+    ignores: ['.next/**', 'node_modules/**', 'next-env.d.ts', 'sanity/sanity.types.ts'],
   },
   // core-web-vitals brings the Next + React rules; typescript adds the
   // @typescript-eslint recommended set (core-web-vitals registers the plugin
