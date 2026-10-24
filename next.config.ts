@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
     loader: 'custom',
     loaderFile: './sanity/lib/imageLoader.ts',
   },
+  experimental: {
+    agentUpgrade: 'security',
+  },
 }
 
 export default nextConfig
