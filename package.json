@@ -43,7 +43,7 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@maciejtrzcinski/sanity-page-builder-core": "^1.0.2",
+    "@maciejtrzcinski/sanity-page-builder-core": "^2.0.0",
     "@maciejtrzcinski/sanity-plugin-section-builder": "^1.0.1",
     "@portabletext/react": "^8.0.1",
     "@sanity/client": "^8.11.0",

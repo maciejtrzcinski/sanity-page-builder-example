@@ -28,7 +28,7 @@ const navs = [
   defineNav({type: 'noNav', query: ``, render: () => null}),
 ]
 
-const navBuilder = createPageBuilderFromSections<NavBlock, ChromeContext, ReactNode>(navs)
+const navBuilder = createPageBuilderFromSections(navs)
 
 /** Render one navigation block to its component. */
 export const renderNav = navBuilder.renderBlock

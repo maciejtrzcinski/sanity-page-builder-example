@@ -26,7 +26,7 @@ const footers = [
   defineFooter({type: 'noFooter', query: ``, render: () => null}),
 ]
 
-const footerBuilder = createPageBuilderFromSections<FooterBlock, ChromeContext, ReactNode>(footers)
+const footerBuilder = createPageBuilderFromSections(footers)
 
 /** Render one footer block to its component. */
 export const renderFooter = footerBuilder.renderBlock

@@ -67,9 +67,7 @@ const sections = [
   }),
 ]
 
-const pageBuilder = createPageBuilderFromSections<PageBuilderBlock, RenderContext, ReactNode>(
-  sections,
-)
+const pageBuilder = createPageBuilderFromSections(sections)
 
 /** Dispatches a block to its renderer. */
 export const renderBlock = pageBuilder.renderBlock
