@@ -1,5 +1,4 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignoreExportsUsedInFile": true,
-  "entry": ["sanity/lib/imageLoader.ts!"]
+  "ignoreExportsUsedInFile": true
 }
